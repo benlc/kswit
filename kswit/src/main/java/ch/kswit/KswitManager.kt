@@ -14,7 +14,7 @@ class KswitManager(val context: Context) {
     private val disposables = CompositeDisposable()
     private val service: KswitService
 
-    init { service = createWebService(createOkHttpClient(), "https://firestore.googleapis.com/v1/projects/benlc-5345d/databases/(default)/documents/ks") }
+    init { service = createWebService(createOkHttpClient(), "https://firestore.googleapis.com/v1/projects/benlc-5345d/databases/(default)/documents/ks/") }
 
     fun start() {
         disposables.add(service.getAppState(context.packageName).retry(3).subscribe(
