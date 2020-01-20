@@ -7,6 +7,6 @@ import retrofit2.http.Path
 
 interface KswitService {
 
-    @GET("ks/{package-name}")
+    @GET("{package-name}")
     fun getAppState(@Path("package-name") packageName: String): Single<Response<Void>>
 }
