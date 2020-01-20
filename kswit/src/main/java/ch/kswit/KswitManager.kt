@@ -1,7 +1,9 @@
 package ch.kswit
 
 import android.content.Context
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +19,10 @@ class KswitManager(val context: Context) {
     init { service = createWebService(createOkHttpClient(), "https://firestore.googleapis.com/v1/projects/benlc-5345d/databases/(default)/documents/ks/") }
 
     fun start() {
-        disposables.add(service.getAppState(context.packageName).retry(3).subscribe(
+        disposables.add(service.getAppState(context.packageName)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .retry(3).subscribe(
             {},
             {}
         ))
