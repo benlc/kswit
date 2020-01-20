@@ -1,0 +1,2 @@
+include ':kswit'
+rootProject.name='Kswit'
